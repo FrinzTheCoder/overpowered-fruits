@@ -1,20 +1,41 @@
 package net.frinzthecoder.opfruits.event;
 
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.frinzthecoder.opfruits.OverpoweredFruits;
 import net.frinzthecoder.opfruits.item.ModItems;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @Mod.EventBusSubscriber(modid = OverpoweredFruits.MOD_ID)
 public class ModEvents {
+
+    @SubscribeEvent
+    public static void addCustomTrade(VillagerTradesEvent event){
+        if(event.getType() == VillagerProfession.FARMER){
+            Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
+            ItemStack target = new ItemStack(ModItems.OPFRUITS_SEEDS.get());
+            ItemStack price = new ItemStack(Items.EMERALD,48);
+            int villagerLevel = 5;
+            trades.get(villagerLevel).add( (trader,rand) -> new MerchantOffer(
+                    price, ItemStack.EMPTY, target, 5, 10, 30, 0.2F, 0
+            ));
+        }
+    }
 
     @SubscribeEvent
     public static void addEffectAfterEat(LivingEntityUseItemEvent.Finish event){

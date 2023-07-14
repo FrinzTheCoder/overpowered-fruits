@@ -1,5 +1,7 @@
 package net.frinzthecoder.opfruits;
 
+import net.frinzthecoder.opfruits.block.ModBlocks;
+import net.frinzthecoder.opfruits.item.ModItems;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -17,6 +19,9 @@ public class OverpoweredFruits {
     public OverpoweredFruits()
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 

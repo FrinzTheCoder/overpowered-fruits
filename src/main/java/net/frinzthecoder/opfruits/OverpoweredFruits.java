@@ -2,6 +2,8 @@ package net.frinzthecoder.opfruits;
 
 import net.frinzthecoder.opfruits.block.ModBlocks;
 import net.frinzthecoder.opfruits.item.ModItems;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -37,7 +39,7 @@ public class OverpoweredFruits {
 
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event){
-
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.OVERPOWERED_FRUIT_CROP.get(), RenderType.cutout());
         }
 
     }

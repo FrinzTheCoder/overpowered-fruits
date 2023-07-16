@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/stem_growth7",
+  "textures": {
+    "stem": "opfruits:block/overpowered_fruits_stage0"
+  }
+}

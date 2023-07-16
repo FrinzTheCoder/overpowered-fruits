@@ -49,7 +49,7 @@ public class ModEvents {
     private static void addRandomEffectsToPlayer(Player player){
         ArrayList<MobEffect> effects = getRandomEffectsToPlayer();
         for (MobEffect effect : effects) {
-            player.addEffect(new MobEffectInstance(effect, 20 * 60 * 30, 4));
+            player.addEffect(new MobEffectInstance(effect, 20 * 60 * 15, 4));
         }
     }
 

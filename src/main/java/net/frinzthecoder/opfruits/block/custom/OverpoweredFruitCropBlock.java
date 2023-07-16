@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
 public class OverpoweredFruitCropBlock extends CropBlock {
     public static final int MIN_AGE = 0;
-    public static final int MAX_AGE = 6;
+    public static final int MAX_AGE = 4;
     public static final IntegerProperty AGE = IntegerProperty.create("age",MIN_AGE,MAX_AGE);
     public OverpoweredFruitCropBlock(Properties properties) {
         super(properties);
@@ -38,8 +38,8 @@ public class OverpoweredFruitCropBlock extends CropBlock {
         builder.add(AGE);
     }
 
-    @Override
-    public void performBonemeal(ServerLevel level, RandomSource source, BlockPos pos, BlockState state) {
-        // Overriding method to disable bonemealing
-    }
+//    @Override
+//    public void performBonemeal(ServerLevel level, RandomSource source, BlockPos pos, BlockState state) {
+//        // Overriding method to disable bonemealing
+//    }
 }

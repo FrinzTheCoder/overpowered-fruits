@@ -38,8 +38,8 @@ public class OverpoweredFruitCropBlock extends CropBlock {
         builder.add(AGE);
     }
 
-//    @Override
-//    public void performBonemeal(ServerLevel level, RandomSource source, BlockPos pos, BlockState state) {
-//        // Overriding method to disable bonemealing
-//    }
+    @Override
+    public void performBonemeal(ServerLevel level, RandomSource source, BlockPos pos, BlockState state) {
+        // Overriding method to disable bonemealing
+    }
 }

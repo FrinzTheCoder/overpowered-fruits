@@ -1,5 +1,7 @@
 {
   "item.opfruits.opfruit": "Overpowered Fruit",
   "item.opfruits.opfruit_seeds": "Overpowered Fruit Seed",
-  "itemGroup.opfruitstab": "Overpowered Fruits"
+  "itemGroup.opfruitstab": "Overpowered Fruits",
+
+  "block.opfruits.opfruit_crop" : "Overpowered Fruits Crop"
 }

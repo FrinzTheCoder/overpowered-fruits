@@ -1,7 +1,11 @@
 {
   "item.opfruits.opfruit": "Overpowered Fruit",
-  "item.opfruits.opfruit_seeds": "Overpowered Fruit Seed",
-  "itemGroup.opfruitstab": "Overpowered Fruits",
+  "item.opfruits.cancellationfruit": "Cancellation Fruit",
+  "item.opfruits.sacrificial": "Sacrificial Fruit",
 
-  "block.opfruits.opfruit_crop" : "Overpowered Fruit Crop"
+  "item.opfruits.opfruit_seeds": "Overpowered Fruit Seed",
+
+  "block.opfruits.opfruit_crop" : "Overpowered Fruit Crop",
+
+  "itemGroup.opfruitstab": "Overpowered Fruits"
 }

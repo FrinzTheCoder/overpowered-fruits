@@ -6,9 +6,11 @@ import net.frinzthecoder.opfruits.item.ModItems;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
@@ -19,6 +21,7 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 @Mod.EventBusSubscriber(modid = OverpoweredFruits.MOD_ID)
@@ -40,9 +43,44 @@ public class ModEvents {
     @SubscribeEvent
     public static void addEffectAfterEat(LivingEntityUseItemEvent.Finish event){
         if(!event.getEntity().getLevel().isClientSide() &&
-                event.getEntity() instanceof Player player &&
-                event.getItem().is(ModItems.OPFRUITS.get())){
+                event.getEntity() instanceof Player player
+                ){
+            ItemStack item = event.getItem();
+            if(item.is(ModItems.OPFRUITS.get())){
                 addRandomEffectsToPlayer(player);
+            }
+            else if (item.is(ModItems.CANCELLATIONFRUITS.get())) {
+                removeNegativeEffectsFromPlayer(player);
+            }
+            else if(item.is(ModItems.SACRIFICIALFRUITS.get())){
+                sacrificeFoodForHealth(player);
+            }
+        }
+    }
+
+    private static void sacrificeFoodForHealth(Player player){
+        player.addEffect(new MobEffectInstance(MobEffects.HEALTH_BOOST, 20 * 30, 1));
+        player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 20 * 30, 4));
+        player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 30, 0));
+        FoodData foodData = player.getFoodData();
+        foodData.setFoodLevel(0);
+        foodData.setExhaustion(99);
+        foodData.setSaturation(0);
+    }
+
+    private static void removeNegativeEffectsFromPlayer(Player player){
+        ArrayList<MobEffect> negativeEffects = new ArrayList<>(Arrays.asList(
+                MobEffects.MOVEMENT_SLOWDOWN,MobEffects.DIG_SLOWDOWN,MobEffects.CONFUSION,MobEffects.BLINDNESS,
+                MobEffects.HUNGER,MobEffects.WEAKNESS,MobEffects.POISON,MobEffects.WITHER,
+                MobEffects.LEVITATION, MobEffects.UNLUCK, MobEffects.DARKNESS // 10, HARM NOT INCLUDED
+        ));
+        Collection<MobEffectInstance> effects = player.getActiveEffects();
+        List<MobEffectInstance> listEffects = new ArrayList<>(effects);
+
+        for(MobEffectInstance effect : listEffects){
+            if(negativeEffects.contains(effect.getEffect())){
+                player.removeEffect(effect.getEffect());
+            }
         }
     }
 
